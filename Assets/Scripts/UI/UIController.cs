@@ -1,11 +1,15 @@
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     public bool Paused { get; private set; }
 
     [SerializeField] GameObject PauseMenu;
+
+    [SerializeField] int MainMenuIndex;
+    [SerializeField] int StartingIndex;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,8 +26,22 @@ public class UIController : MonoBehaviour
     public void Pause()
     {
         Paused = !Paused;
-        PauseMenu.SetActive(Paused);
+        if(PauseMenu != null) PauseMenu.SetActive(Paused);
         Time.timeScale = Paused ? 0 : 1;
     }
 
+    public void Play()
+    {
+        SceneManager.LoadScene(StartingIndex);
+    }
+
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene(MainMenuIndex);
+    }
+
+    public void Quit()
+    { 
+        Application.Quit();
+    }
 }
