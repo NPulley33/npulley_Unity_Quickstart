@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public abstract class PlayerMovement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,4 +19,7 @@ public class PlayerMovement : MonoBehaviour
         if (locked) Cursor.lockState = CursorLockMode.None;
         else Cursor.lockState = CursorLockMode.Locked;
     }
+
+    public abstract void Move();
+    public abstract void Look();
 }
