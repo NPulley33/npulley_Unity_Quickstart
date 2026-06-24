@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Class designed by NPulley
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     PlayerMovement movement;
@@ -14,13 +17,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext value)
-    { 
-    
+    {
+        if (movement != null) movement.UpdateMoveInput(value.ReadValue<Vector2>());
     }
 
     public void OnLook(InputAction.CallbackContext value)
-    { 
-    
+    {
+        if (movement != null) movement.UpdateLookInput(value.ReadValue<Vector2>());
     }
 
     public void OnJump(InputAction.CallbackContext value)
@@ -30,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnSprint(InputAction.CallbackContext value)
     { 
+        Debug.Log(value.performed);
     
     }
 
@@ -38,7 +42,6 @@ public class PlayerController : MonoBehaviour
         if (uiController != null && movement != null)
         { 
             uiController.Pause();
-            movement.LockCursor(uiController.Paused);
         }
     }
 
